@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NekoMori_FM | Gamer Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f13;
+      color: #e4e4e7;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ===== HAMBURGER + SIDEBAR ===== */
+    .menu-btn {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 1001;
+      background: #1e1e27;
+      border: 1px solid #2e2e3a;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #a78bfa;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: #16161d;
+      border-right: 1px solid #27272a;
+      z-index: 1000;
+      transition: 0.3s ease;
+      padding: 80px 20px 30px;
+    }
+
+    .sidebar.active {
+      left: 0;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #e4e4e7;
+      text-decoration: none;
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      font-size: 1.05rem;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      background: #1e1e27;
+      color: #a78bfa;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-top: 80px;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 20px 20px 40px;
+    }
+
+    .pfp {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #a78bfa;
+      margin-bottom: 16px;
+      background: #1e1e27;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      background: #1e1e27;
+      color: #a78bfa;
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      border: 1px solid #2e2e3a;
+    }
+
+    .hero p {
+      color: #a1a1aa;
+      font-size: 1.05rem;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #f4f4f5;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      height: 22px;
+      width: 4px;
+      background: #a78bfa;
+      border-radius: 2px;
+    }
+
+    .about {
+      background: #16161d;
+      padding: 24px;
+      border-radius: 16px;
+      border: 1px solid #27272a;
+    }
+
+    /* Games */
+    .games {
+      display: grid;
+      gap: 16px;
+    }
+
+    .game-card {
+      background: #16161d;
+      border: 1px solid #27272a;
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .game-card:active {
+      transform: scale(0.98);
+    }
+
+    .game-card:hover {
+      border-color: #a78bfa;
+    }
+
+    .game-icon {
+      width: 52px;
+      height: 52px;
+      background: #1e1e27;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+
+    .game-info h3 {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+    }
+
+    .game-info p {
+      color: #a1a1aa;
+      font-size: 0.9rem;
+    }
+
+    /* Social */
+    .social {
+      text-align: center;
+    }
+
+    .tiktok-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #a78bfa;
+      color: #0f0f13;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0 40px;
+      color: #71717a;
+      font-size: 0.85rem;
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.78);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1100;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal {
+      background: #16161d;
+      border: 1px solid #27272a;
+      border-radius: 20px 20px 0 0;
+      width: 100%;
+      max-width: 500px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 22px;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.35rem;
+    }
+
+    .close-btn {
+      background: #1e1e27;
+      border: none;
+      color: #a1a1aa;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .profile-info {
+      background: #1e1e27;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .profile-info p {
+      margin-bottom: 7px;
+      font-size: 0.95rem;
+    }
+
+    .profile-info strong {
+      color: #a78bfa;
+    }
+
+    .pics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .pic-box {
+      background: #1e1e27;
+      border-radius: 12px;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      border: 1px solid #3f3f46;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #71717a;
+      font-size: 0.9rem;
+    }
+
+    .pic-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .pic-box {
+      position: relative;
+    }
+
+    .add-btn {
+      width: 100%;
+      height: 100%;
+      background: none;
+      border: none;
+      color: #a78bfa;
+      font-size: 2.4rem;
+      cursor: pointer;
+    }
+
+    .pfp-wrap {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 16px;
+    }
+
+    .pfp-wrap .pfp {
+      display: block;
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .pfp-plus {
+      position: absolute;
+      right: -2px;
+      bottom: -2px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 2px solid #0f0f13;
+      background: #a78bfa;
+      color: #0f0f13;
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    /* ===== FLOATING BUTTONS (theme + sound) ===== */
+    .fab-group {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 1001;
+      display: flex;
+      gap: 8px;
+    }
+
+    .fab {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #1e1e27;
+      border: 1px solid #2e2e3a;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    /* ===== LIGHTBOX (image viewer) ===== */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1300;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox img {
+      max-width: 94%;
+      max-height: 80vh;
+      border-radius: 12px;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 60px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    .lb-prev { left: 8px; }
+    .lb-next { right: 8px; }
+
+    /* ===== TOAST MESSAGE ===== */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #a78bfa;
+      color: #0f0f13;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 1400;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    /* ===== SCROLL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ===== LIGHT MODE ===== */
+    body.light {
+      background: #f4f4f8;
+      color: #1f1f29;
+    }
+
+    body.light .sidebar,
+    body.light .about,
+    body.light .game-card,
+    body.light .modal {
+      background: #ffffff;
+      border-color: #e2e2ea;
+    }
+
+    body.light .menu-btn,
+    body.light .fab,
+    body.light .hero .tag,
+    body.light .game-icon,
+    body.light .profile-info,
+    body.light .pic-box,
+    body.light .close-btn {
+      background: #ececf3;
+      border-color: #dcdce6;
+    }
+
+    body.light .sidebar a { color: #1f1f29; }
+    body.light .sidebar a:hover { background: #ececf3; color: #7c5ce6; }
+    body.light h2 { color: #18181b; }
+    body.light .hero p,
+    body.light .game-info p { color: #52525b; }
+    body.light .close-btn { color: #52525b; }
+    body.light .pfp { background: #ececf3; }
+    body.light .profile-info strong { color: #7c5ce6; }
+    body.light .overlay { background: rgba(0,0,0,0.35); }
+
+    .remove-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme + Sound buttons -->
+  <div class="fab-group">
+    <button type="button" class="fab" id="soundBtn" aria-label="Toggle music">🔇</button>
+    <button type="button" class="fab" id="themeBtn" aria-label="Toggle light or dark mode">🌙</button>
+  </div>
+
+  <!-- Background music: put a file named music.mp3 in the same folder -->
+  <audio id="bgm" src="music.mp3" loop preload="none"></audio>
+
+  <!-- Image viewer -->
+  <div class="lightbox" id="lightbox">
+    <button type="button" class="lb-close" id="lbClose">✕</button>
+    <button type="button" class="lb-nav lb-prev" id="lbPrev">‹</button>
+    <img id="lbImg" alt="Screenshot">
+    <button type="button" class="lb-nav lb-next" id="lbNext">›</button>
+  </div>
+
+  <!-- Hamburger Button -->
+  <div class="menu-btn" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <a href="#" onclick="closeMenu()">🏠 Home</a>
+    <a href="#about" onclick="closeMenu()">👤 About</a>
+    <a href="#games" onclick="closeMenu()">🎮 Games</a>
+    <a href="#contact" onclick="closeMenu()">📱 Contact</a>
+  </div>
+  <div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+  <div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+      <!-- Tap the + to change your profile picture (or put pfp.jpg in the folder) -->
+      <div class="pfp-wrap">
+        <img id="pfpImg" class="pfp" alt="Profile" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+        <button type="button" class="pfp-plus" id="pfpPlus">+</button>
+        <input type="file" id="pfpInput" accept="image/*" hidden>
+      </div>
+      <h1>NekoMori_FM</h1>
+      <div class="tag">Casual Gamer • Hunter</div>
+      <p>Just a teenager who loves playing games and vibing.</p>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="about">
+        <p>
+          Hey! I'm NekoMori_FM, a casual gamer who enjoys intense fights and big battles. 
+          Whether it's sniping & supporting in extraction modes or going aggressive in tanks and ships, 
+          I'm always down to play and have fun.
+        </p>
+      </div>
+    </section>
+
+    <!-- Favorite Games -->
+    <section id="games">
+      <h2>Favorite Games</h2>
+      <div class="games">
+
+        <div class="game-card" onclick="openModal('arena')">
+          <div class="game-icon">🔫</div>
+          <div class="game-info">
+            <h3>Arena Breakout</h3>
+            <p>Sniper & Support • Lockdown & Forbidden</p>
+          </div>
+        </div>
+
+        <div class="game-card" onclick="openModal('warthunder')">
+          <div class="game-icon">🚢</div>
+          <div class="game-info">
+            <h3>War Thunder Mobile</h3>
+            <p>Aggressive & Head-on • Naval & Ground</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Social -->
+    <section class="social" id="contact">
+      <h2>Find Me</h2>
+      <a href="https://www.tiktok.com/@nekomori_fm0" target="_blank" class="tiktok-btn">
+        TikTok → @nekomori_fm0
+      </a>
+    </section>
+
+    <footer>
+      Made by NekoMori_FM • 2026
+    </footer>
+
+  </div>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Arena Breakout Modal -->
+  <div class="modal-overlay" id="arena">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🔫 Arena Breakout</h3>
+        <button class="close-btn" onclick="closeModal('arena')">✕</button>
+      </div>
+
+      <div class="profile-info">
+        <p><strong>Username:</strong> NekoMori_FM</p>
+        <p><strong>Style:</strong> Sniper and Support</p>
+        <p><strong>Favorite Mode:</strong> Lockdown and Forbidden</p>
+        <p><strong>About:</strong> Love the intense looting and gunfights. Always trying to extract with good loot.</p>
+      </div>
+
+      <h4 style="margin-bottom: 12px;">My Screenshots</h4>
+      <div class="pics-grid"></div>
+    </div>
+  </div>
+
+  <!-- War Thunder Modal -->
+  <div class="modal-overlay" id="warthunder">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>🚢 War Thunder Mobile</h3>
+        <button class="close-btn" onclick="closeModal('warthunder')">✕</button>
+      </div>
+
+      <div class="profile-info">
+        <p><strong>Username:</strong> NekoMori_FM</p>
+        <p><strong>Style:</strong> Aggressive and Head-on</p>
+        <p><strong>Favorite Mode:</strong> Naval and Ground Battles</p>
+        <p><strong>Rank:</strong> Hunter</p>
+        <p><strong>About:</strong> Enjoy driving tanks and ships. Big battles are the best. Currently rocking the IJN Yamato and high-tier tanks.</p>
+      </div>
+
+      <h4 style="margin-bottom: 12px;">My Screenshots</h4>
+      <div class="pics-grid"></div>
+    </div>
+  </div>
+
+  <script>
+    // Menu
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('active');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+    function closeMenu() {
+      document.getElementById('sidebar').classList.remove('active');
+      document.getElementById('overlay').classList.remove('active');
+    }
+
+    // Modal
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+
+    // ===== PICTURE SLOTS (+ button) =====
+    // If a file like wt1.jpg exists in the folder it shows automatically.
+    // Otherwise you get a + button to pick a picture from your phone.
+    const SLOTS = {
+      arena: ['aby1.jpg', 'aby2.jpg', 'aby3.jpg', 'aby4.jpg'],
+      warthunder: ['wt1.jpg', 'wt2.jpg', 'wt3.jpg', 'wt4.jpg']
+    };
+
+    function resizeImage(file, done) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          const max = 900;
+          const scale = Math.min(1, max / img.width);
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.width * scale);
+          canvas.height = Math.round(img.height * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          done(canvas.toDataURL('image/jpeg', 0.75));
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function showPlus(box, key) {
+      box.innerHTML = '';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'add-btn';
+      btn.textContent = '+';
+
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.hidden = true;
+
+      btn.onclick = function () { input.click(); };
+      input.onchange = function () {
+        const file = input.files[0];
+        if (!file) return;
+        resizeImage(file, function (dataUrl) {
+          try {
+            localStorage.setItem(key, dataUrl);
+          } catch (e) {
+            alert('Storage is full, so this picture will disappear on refresh.');
+          }
+          showImage(box, dataUrl, key, true);
+        });
+      };
+
+      box.appendChild(btn);
+      box.appendChild(input);
+    }
+
+    function showImage(box, src, key, removable) {
+      box.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Screenshot';
+      box.appendChild(img);
+
+      if (removable) {
+        const x = document.createElement('button');
+        x.type = 'button';
+        x.className = 'remove-btn';
+        x.textContent = '✕';
+        x.onclick = function () {
+          try { localStorage.removeItem(key); } catch (e) {}
+          showPlus(box, key);
+        };
+        box.appendChild(x);
+      }
+    }
+
+    function buildGrid(game) {
+      const grid = document.querySelector('#' + game + ' .pics-grid');
+      grid.innerHTML = '';
+      SLOTS[game].forEach(function (file, i) {
+        const key = 'pic_' + game + '_' + i;
+        const box = document.createElement('div');
+        box.className = 'pic-box';
+        grid.appendChild(box);
+
+        let saved = null;
+        try { saved = localStorage.getItem(key); } catch (e) {}
+        if (saved) {
+          showImage(box, saved, key, true);
+          return;
+        }
+
+        const probe = new Image();
+        probe.onload = function () { showImage(box, file, key, false); };
+        probe.onerror = function () { showPlus(box, key); };
+        probe.src = file;
+      });
+    }
+
+    buildGrid('arena');
+    buildGrid('warthunder');
+
+    // ===== PROFILE PICTURE (+ button) =====
+    const pfpImg = document.getElementById('pfpImg');
+    const pfpPlus = document.getElementById('pfpPlus');
+    const pfpInput = document.getElementById('pfpInput');
+
+    let savedPfp = null;
+    try { savedPfp = localStorage.getItem('pfp'); } catch (e) {}
+
+    if (savedPfp) {
+      pfpImg.src = savedPfp;
+    } else {
+      const probe = new Image();
+      probe.onload = function () { pfpImg.src = 'pfp.jpg'; };
+      probe.src = 'pfp.jpg';
+    }
+
+    pfpPlus.onclick = function () { pfpInput.click(); };
+    pfpImg.onclick = function () { pfpInput.click(); };
+
+    pfpInput.onchange = function () {
+      const file = pfpInput.files[0];
+      if (!file) return;
+      resizeImage(file, function (dataUrl) {
+        try {
+          localStorage.setItem('pfp', dataUrl);
+        } catch (e) {
+          alert('Storage is full, so this picture will disappear on refresh.');
+        }
+        pfpImg.src = dataUrl;
+      });
+    };
+
+    // ===== TOAST =====
+    function showToast(text) {
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.textContent = text;
+      document.body.appendChild(t);
+      setTimeout(function () { t.remove(); }, 3500);
+    }
+
+    // ===== LIGHT / DARK SWITCH =====
+    const themeBtn = document.getElementById('themeBtn');
+
+    function applyTheme(light) {
+      document.body.classList.toggle('light', light);
+      themeBtn.textContent = light ? '☀️' : '🌙';
+    }
+
+    let savedTheme = null;
+    try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+    applyTheme(savedTheme === 'light');
+
+    themeBtn.onclick = function () {
+      const light = !document.body.classList.contains('light');
+      applyTheme(light);
+      try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch (e) {}
+    };
+
+    // ===== SOUND TOGGLE =====
+    const bgm = document.getElementById('bgm');
+    const soundBtn = document.getElementById('soundBtn');
+    bgm.volume = 0.4;
+
+    soundBtn.onclick = function () {
+      if (bgm.paused) {
+        bgm.play().then(function () {
+          soundBtn.textContent = '🔊';
+        }).catch(function () {
+          showToast('Add a music.mp3 file to your site folder first');
+        });
+      } else {
+        bgm.pause();
+        soundBtn.textContent = '🔇';
+      }
+    };
+
+    // ===== IMAGE VIEWER =====
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    let lbList = [];
+    let lbIndex = 0;
+
+    function lbShow() {
+      lbImg.src = lbList[lbIndex].src;
+      const multi = lbList.length > 1;
+      lbPrev.style.display = multi ? 'block' : 'none';
+      lbNext.style.display = multi ? 'block' : 'none';
+    }
+
+    function lbStep(dir) {
+      lbIndex = (lbIndex + dir + lbList.length) % lbList.length;
+      lbShow();
+    }
+
+    function lbClose() {
+      lightbox.classList.remove('active');
+    }
+
+    document.addEventListener('click', function (e) {
+      const img = e.target.closest ? e.target.closest('.pic-box img') : null;
+      if (!img) return;
+      lbList = Array.from(img.closest('.pics-grid').querySelectorAll('.pic-box img'));
+      lbIndex = lbList.indexOf(img);
+      lbShow();
+      lightbox.classList.add('active');
+    });
+
+    document.getElementById('lbClose').onclick = lbClose;
+    lbPrev.onclick = function () { lbStep(-1); };
+    lbNext.onclick = function () { lbStep(1); };
+    lightbox.addEventListener('click', function (e) {
+      if (e.target === lightbox) lbClose();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') lbClose();
+    });
+
+    let touchStartX = 0;
+    lightbox.addEventListener('touchstart', function (e) {
+      touchStartX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', function (e) {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50 && lbList.length > 1) lbStep(dx < 0 ? 1 : -1);
+    });
+
+    // ===== SCROLL ANIMATION =====
+    const revealEls = document.querySelectorAll('.hero, section');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealEls.forEach(function (el) {
+        el.classList.add('reveal');
+        observer.observe(el);
+      });
+    }
+  </script>
+</body>
+</html>
