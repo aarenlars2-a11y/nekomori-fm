@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -500,6 +500,315 @@
       transform: none;
     }
 
+    /* ===== PAGES ===== */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .quick-links a {
+      background: #16161d;
+      border: 1px solid #27272a;
+      color: #e4e4e7;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      transition: 0.2s;
+    }
+
+    .quick-links a:hover {
+      border-color: #a78bfa;
+      color: #a78bfa;
+    }
+
+    .sidebar a.active {
+      background: #1e1e27;
+      color: #a78bfa;
+    }
+
+    body.light .quick-links a {
+      background: #ffffff;
+      border-color: #e2e2ea;
+      color: #1f1f29;
+    }
+
+    body.light .sidebar a.active {
+      background: #ececf3;
+      color: #7c5ce6;
+    }
+
+    /* ===== CONTACT CARDS ===== */
+    .contact-intro {
+      color: #a1a1aa;
+      margin-bottom: 20px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #16161d;
+      border: 1px solid #27272a;
+      border-radius: 16px;
+      padding: 18px;
+      color: inherit;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: #a78bfa;
+      transform: translateY(-2px);
+    }
+
+    .contact-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #1e1e27;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .contact-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .contact-text small {
+      display: block;
+      color: #a1a1aa;
+      font-size: 0.8rem;
+    }
+
+    .contact-text strong {
+      display: block;
+      font-size: 1rem;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-text a {
+      color: #e4e4e7;
+      text-decoration: none;
+    }
+
+    .contact-arrow {
+      color: #a78bfa;
+      font-size: 1.4rem;
+    }
+
+    .copy-btn {
+      background: #a78bfa;
+      color: #0f0f13;
+      border: none;
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    body.light .contact-card {
+      background: #ffffff;
+      border-color: #e2e2ea;
+    }
+
+    body.light .contact-icon {
+      background: #ececf3;
+    }
+
+    body.light .contact-intro,
+    body.light .contact-text small {
+      color: #52525b;
+    }
+
+    body.light .contact-text a {
+      color: #1f1f29;
+    }
+
+    /* ===== GAMES PAGE EXTRAS ===== */
+    #page-games { position: relative; }
+
+    .deco span {
+      position: absolute;
+      font-size: 2.2rem;
+      opacity: 0.12;
+      pointer-events: none;
+      animation: floaty 7s ease-in-out infinite;
+    }
+
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(8deg); }
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+
+    .games-intro { color: #a1a1aa; margin: -6px 0 18px; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: #16161d;
+      border: 1px solid #27272a;
+      border-radius: 14px;
+      padding: 14px 8px;
+      text-align: center;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.3rem;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat small { color: #a1a1aa; font-size: 0.75rem; }
+
+    .filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+
+    .chip {
+      background: #16161d;
+      border: 1px solid #2e2e3a;
+      color: #e4e4e7;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .chip.active {
+      background: #a78bfa;
+      border-color: #a78bfa;
+      color: #0f0f13;
+      font-weight: 600;
+    }
+
+    .game-card { position: relative; overflow: hidden; }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+    }
+
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(167, 139, 250, 0.22);
+    }
+
+    .game-card:active { transform: scale(0.98); }
+    .game-card.hidden { display: none; }
+    .game-info { flex: 1; min-width: 0; }
+    .game-icon { animation: bob 3s ease-in-out infinite; }
+
+    .game-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+
+    .game-tags span {
+      background: #1e1e27;
+      color: #a78bfa;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      border: 1px solid #2e2e3a;
+    }
+
+    .fav-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .fav-btn.on { animation: pop 0.35s ease; }
+
+    .picker {
+      margin-top: 24px;
+      text-align: center;
+      background: #16161d;
+      border: 1px dashed #3f3f46;
+      border-radius: 16px;
+      padding: 22px 16px;
+    }
+
+    .picker h3 { margin-bottom: 6px; }
+    .picker p { color: #a1a1aa; margin-bottom: 14px; min-height: 1.6em; }
+
+    .pick-btn, .open-btn {
+      background: #a78bfa;
+      color: #0f0f13;
+      border: none;
+      border-radius: 50px;
+      padding: 11px 22px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    .pick-btn:disabled { opacity: 0.6; }
+
+    .open-btn {
+      display: block;
+      margin: 12px auto 0;
+      background: #1e1e27;
+      color: #a78bfa;
+      border: 1px solid #a78bfa;
+    }
+
+    .open-btn[hidden] { display: none; }
+
+    body.light .stat,
+    body.light .picker,
+    body.light .chip { background: #ffffff; border-color: #e2e2ea; }
+    body.light .chip { color: #1f1f29; }
+    body.light .chip.active { background: #a78bfa; border-color: #a78bfa; color: #0f0f13; }
+    body.light .game-tags span { background: #ececf3; border-color: #dcdce6; color: #7c5ce6; }
+    body.light .games-intro,
+    body.light .stat small,
+    body.light .picker p { color: #52525b; }
+    body.light .open-btn { background: #ececf3; color: #7c5ce6; }
+
     /* ===== LIGHT MODE ===== */
     body.light {
       background: #f4f4f8;
@@ -578,16 +887,17 @@
 
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
-    <a href="#" onclick="closeMenu()">🏠 Home</a>
-    <a href="#about" onclick="closeMenu()">👤 About</a>
-    <a href="#games" onclick="closeMenu()">🎮 Games</a>
-    <a href="#contact" onclick="closeMenu()">📱 Contact</a>
+    <a href="#home" data-page="home" onclick="closeMenu()">🏠 Home</a>
+    <a href="#about" data-page="about" onclick="closeMenu()">👤 About</a>
+    <a href="#games" data-page="games" onclick="closeMenu()">🎮 Games</a>
+    <a href="#contact" data-page="contact" onclick="closeMenu()">📱 Contact</a>
   </div>
   <div class="overlay" id="overlay" onclick="closeMenu()"></div>
 
   <div class="container">
 
-    <!-- Hero -->
+    <!-- ===== HOME PAGE ===== -->
+    <div class="page" id="page-home">
     <div class="hero">
       <!-- Tap the + to change your profile picture (or put pfp.jpg in the folder) -->
       <div class="pfp-wrap">
@@ -598,9 +908,16 @@
       <h1>NekoMori_FM</h1>
       <div class="tag">Casual Gamer • Hunter</div>
       <p>Just a teenager who loves playing games and vibing.</p>
+      <div class="quick-links">
+        <a href="#about">👤 About</a>
+        <a href="#games">🎮 Games</a>
+        <a href="#contact">📱 Contact</a>
+      </div>
+    </div>
     </div>
 
-    <!-- About -->
+    <!-- ===== ABOUT PAGE ===== -->
+    <div class="page" id="page-about">
     <section id="about">
       <h2>About Me</h2>
       <div class="about">
@@ -611,38 +928,95 @@
         </p>
       </div>
     </section>
+    </div>
 
-    <!-- Favorite Games -->
+    <!-- ===== GAMES PAGE ===== -->
+    <div class="page" id="page-games">
     <section id="games">
+      <div class="deco" aria-hidden="true">
+        <span style="top:40px;right:8%">🎮</span>
+        <span style="top:38%;left:2%;animation-delay:-2s">🎯</span>
+        <span style="top:62%;right:4%;animation-delay:-4s">⚓</span>
+        <span style="bottom:6%;left:10%;animation-delay:-1s">🛡️</span>
+      </div>
+
       <h2>Favorite Games</h2>
+      <p class="games-intro">Tap a game to see my profile and screenshots.</p>
+
+      <div class="stats-row">
+        <div class="stat"><b class="count" data-to="2">0</b><small>Games</small></div>
+        <div class="stat"><b>Hunter</b><small>Rank</small></div>
+        <div class="stat"><b class="count" data-to="4">0</b><small>Fave modes</small></div>
+      </div>
+
+      <div class="filter-chips">
+        <button type="button" class="chip active" onclick="filterGames('all', this)">All</button>
+        <button type="button" class="chip" onclick="filterGames('shooter', this)">🔫 Shooter</button>
+        <button type="button" class="chip" onclick="filterGames('vehicle', this)">🚢 Vehicles</button>
+      </div>
+
       <div class="games">
 
-        <div class="game-card" onclick="openModal('arena')">
+        <div class="game-card" data-type="shooter" onclick="openModal('arena')">
           <div class="game-icon">🔫</div>
           <div class="game-info">
             <h3>Arena Breakout</h3>
-            <p>Sniper & Support • Lockdown & Forbidden</p>
+            <p>Lockdown & Forbidden</p>
+            <div class="game-tags"><span>Sniper</span><span>Support</span><span>Extraction</span></div>
           </div>
+          <button type="button" class="fav-btn" id="fav-arena" onclick="toggleFav(event, 'arena')" aria-label="Favorite">🤍</button>
         </div>
 
-        <div class="game-card" onclick="openModal('warthunder')">
+        <div class="game-card" data-type="vehicle" onclick="openModal('warthunder')">
           <div class="game-icon">🚢</div>
           <div class="game-info">
             <h3>War Thunder Mobile</h3>
-            <p>Aggressive & Head-on • Naval & Ground</p>
+            <p>Naval & Ground Battles</p>
+            <div class="game-tags"><span>Aggressive</span><span>Head-on</span><span>Tanks</span><span>Ships</span></div>
           </div>
+          <button type="button" class="fav-btn" id="fav-warthunder" onclick="toggleFav(event, 'warthunder')" aria-label="Favorite">🤍</button>
+        </div>
+
+      </div>
+
+      <div class="picker">
+        <h3>Can't decide? 🎲</h3>
+        <p id="pickerText">Let fate choose what to play.</p>
+        <button type="button" class="pick-btn" onclick="pickGame()">Pick a game for me</button>
+        <button type="button" class="open-btn" id="pickOpen" hidden></button>
+      </div>
+    </section>
+    </div>
+
+    <!-- ===== CONTACT PAGE ===== -->
+    <div class="page" id="page-contact">
+    <section id="contact">
+      <h2>Find Me</h2>
+      <p class="contact-intro">Want to squad up, trade tips, or just say hi? Hit me up here.</p>
+
+      <div class="contact-list">
+
+        <a class="contact-card" href="https://www.tiktok.com/@nekomori_fm0" target="_blank" rel="noopener">
+          <div class="contact-icon">🎵</div>
+          <div class="contact-text">
+            <small>TikTok</small>
+            <strong>@nekomori_fm0</strong>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-text">
+            <small>Email</small>
+            <a href="mailto:aarenlars2@gmail.com"><strong>aarenlars2@gmail.com</strong></a>
+          </div>
+          <button type="button" class="copy-btn" onclick="copyEmail()">Copy</button>
         </div>
 
       </div>
     </section>
-
-    <!-- Social -->
-    <section class="social" id="contact">
-      <h2>Find Me</h2>
-      <a href="https://www.tiktok.com/@nekomori_fm0" target="_blank" class="tiktok-btn">
-        TikTok → @nekomori_fm0
-      </a>
-    </section>
+    </div>
 
     <footer>
       Made by NekoMori_FM • 2026
@@ -970,6 +1344,121 @@
         observer.observe(el);
       });
     }
+
+    // ===== PAGES (Home / About / Games / Contact) =====
+    const PAGES = ['home', 'about', 'games', 'contact'];
+
+    function showPage(name) {
+      if (PAGES.indexOf(name) === -1) name = 'home';
+
+      PAGES.forEach(function (p) {
+        document.getElementById('page-' + p).classList.toggle('active', p === name);
+      });
+
+      document.querySelectorAll('.sidebar a').forEach(function (a) {
+        a.classList.toggle('active', a.getAttribute('data-page') === name);
+      });
+
+      window.scrollTo(0, 0);
+      if (name === 'games') animateCounts();
+
+      // replay the fade-in each time a page opens
+      document.querySelectorAll('#page-' + name + ' .reveal').forEach(function (el) {
+        el.classList.remove('visible');
+        void el.offsetWidth;
+        requestAnimationFrame(function () { el.classList.add('visible'); });
+      });
+    }
+
+    function route() {
+      showPage(location.hash.replace('#', ''));
+    }
+
+    // ===== GAMES PAGE =====
+    function filterGames(type, btn) {
+      document.querySelectorAll('.filter-chips .chip').forEach(function (c) { c.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelectorAll('.game-card').forEach(function (card) {
+        const show = type === 'all' || card.getAttribute('data-type') === type;
+        card.classList.toggle('hidden', !show);
+      });
+    }
+
+    function setFav(id, on) {
+      const b = document.getElementById('fav-' + id);
+      b.textContent = on ? '❤️' : '🤍';
+      b.classList.toggle('on', on);
+    }
+
+    function toggleFav(e, id) {
+      e.stopPropagation();
+      const on = !document.getElementById('fav-' + id).classList.contains('on');
+      setFav(id, on);
+      try { localStorage.setItem('fav_' + id, on ? '1' : '0'); } catch (err) {}
+    }
+
+    ['arena', 'warthunder'].forEach(function (id) {
+      let v = null;
+      try { v = localStorage.getItem('fav_' + id); } catch (err) {}
+      if (v === '1') setFav(id, true);
+    });
+
+    function pickGame() {
+      const games = [
+        { id: 'arena', name: 'Arena Breakout' },
+        { id: 'warthunder', name: 'War Thunder Mobile' }
+      ];
+      const text = document.getElementById('pickerText');
+      const btn = document.querySelector('.pick-btn');
+      const open = document.getElementById('pickOpen');
+      btn.disabled = true;
+      open.hidden = true;
+      let n = 0;
+      const timer = setInterval(function () {
+        text.textContent = '🎲 ' + games[n % games.length].name + '...';
+        n++;
+      }, 120);
+      setTimeout(function () {
+        clearInterval(timer);
+        const pick = games[Math.floor(Math.random() * games.length)];
+        text.textContent = "Tonight's pick: " + pick.name + ' 🎮';
+        btn.disabled = false;
+        btn.textContent = 'Spin again';
+        open.hidden = false;
+        open.textContent = 'See ' + pick.name + ' →';
+        open.onclick = function () { openModal(pick.id); };
+      }, 1300);
+    }
+
+    function animateCounts() {
+      document.querySelectorAll('.count').forEach(function (el) {
+        const to = parseInt(el.getAttribute('data-to'), 10);
+        const start = performance.now();
+        function tick(now) {
+          const t = Math.min(1, (now - start) / 800);
+          el.textContent = Math.round(to * t);
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    // ===== COPY EMAIL =====
+    function copyEmail() {
+      const email = 'aarenlars2@gmail.com';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function () {
+          showToast('Email copied!');
+        }).catch(function () {
+          showToast('Could not copy. Tap the email to open your mail app.');
+        });
+      } else {
+        showToast('Tap the email to open your mail app.');
+      }
+    }
+
+    window.addEventListener('hashchange', route);
+    route();
   </script>
 </body>
 </html>
